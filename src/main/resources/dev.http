@@ -1,0 +1,89 @@
+### Login and get JWT Token
+POST http://localhost:7000/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+> {%
+    client.global.set("token", response.body.token);
+    client.log("Token fetched successfully.");
+    client.log("Bearer " + response.body.token);
+%}
+
+### Get lessons by instructor
+GET http://localhost:7000/skilesson/instructor/1
+
+### Get all ski lessons
+GET http://localhost:7000/skilessons
+
+### Get lessons by level
+GET http://localhost:7000/skilessons/level/BEGINNER
+
+### Get ski lesson by ID
+GET http://localhost:7000/skilessons/2
+
+### Create new ski lesson (Admin only)
+POST http://localhost:7000/createskilessons
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Advanced Carving",
+  "startDateTime": "2025-04-10T09:00:00",
+  "endDateTime": "2025-04-10T11:00:00",
+  "latitude": 60.3913,
+  "longitude": 5.3221,
+  "price": 599.99,
+  "skillLevel": "ADVANCED",
+  "instructorId": 1
+}
+
+### Update ski lesson (Admin only)
+PUT http://localhost:7000/updateskilessons/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Beginner's Paradise"
+}
+
+
+
+### Add instructor to lesson
+PUT http://localhost:7000/skilessons/1/instructors/2
+
+### Create instructor
+POST http://localhost:7000/instructors
+Content-Type: application/json
+
+{
+  "firstName": "Anna",
+  "lastName": "Berg",
+  "email": "anna.berg@example.com",
+  "phone": "98765432",
+  "experience": 6
+}
+
+### Get all instructors
+GET http://localhost:7000/instructors
+
+### Update instructor
+PUT http://localhost:7000/instructors/1
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Updated",
+  "email": "john.updated@example.com",
+  "phone": "00000000",
+  "experience": 10
+}
+
+### Delete instructor
+DELETE http://localhost:7000/instructors/1
+
+### Delete ski lesson (Admin only)
+DELETE http://localhost:7000/deleteskilesson/1
+Authorization: Bearer {{token}}
