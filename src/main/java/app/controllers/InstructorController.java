@@ -12,7 +12,7 @@ public class InstructorController {
     InstructorDAO instructorDAO = InstructorDAO.getInstance(emf);
 
     public void getAllInstructors(Context ctx) {
-        ctx.json(instructorDAO.getEntity2s());
+        ctx.json(instructorDAO.getInstructors());
     }
 
     public void getInstructorById(Context ctx) {

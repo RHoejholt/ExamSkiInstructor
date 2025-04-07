@@ -35,7 +35,7 @@ public class InstructorDAO implements IDAO<InstructorDTO> {
         return new InstructorDTO(instructor); // Return a DTO representing the saved entity
     }
 
-    public List<InstructorDTO> getEntity2s() {
+    public List<InstructorDTO> getInstructors() {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Instructor> query = em.createQuery("SELECT p FROM Instructor p", Instructor.class);
             return InstructorDTO.toDTOList(query.getResultList()); // Convert the list of Entityies to DTOs
